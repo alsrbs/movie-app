@@ -11,8 +11,6 @@ const store = new Store({
 })
 export default store
 
-const apikey = 'f21631bb'
-const url = `https://omdbapi.com?apikey=${apikey}`
  
 // 영화검색
 export const searchMovies = async page => {
@@ -23,7 +21,13 @@ export const searchMovies = async page => {
     store.state.message = ''
   }
   try {
-    const res = await fetch(`${url}&s=${store.state.searchText}&page=${page}`)
+    const res = await fetch('/api/movie', {
+      method: 'POST', 
+      body: JSON.stringify({
+        title: store.state.searchText,
+        page
+      })
+    })
     const { Search, totalResults, Response, Error } = await res.json()
     if (Response === 'True') {
       store.state.movies = [...store.state.movies, ...Search]
@@ -40,7 +44,12 @@ export const searchMovies = async page => {
 }
 export const getMovieDetails = async id => {
   try {
-    const res = await fetch(`${url}&i=${id}&plot=full`)
+    const res = await fetch('/api/movie', {
+      method: 'POST', 
+      body: JSON.stringify({
+        id
+      })
+    })
     store.state.movie = await res.json()
   } catch (error) {
     console.log('getMovieDetails error:', error)
