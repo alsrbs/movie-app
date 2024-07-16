@@ -8,5 +8,5 @@ export default createRouter([
   { path: '#/', component: Home },
   { path: '#/movie', component: Movie },
   { path: '#/about', component: About },
-  { path: '.{0,}', component: NotFound }
+  { path: '.*', component: NotFound } // path가 일치하는 것이 없다면 
 ])

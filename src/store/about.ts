@@ -1,6 +1,15 @@
 import { Store } from "../core/heropy";
 
-export default new Store ({
+interface State {
+  photo: string
+  name: string
+  email: string
+  blog: string
+  github: string
+  repository: string
+}
+
+export default new Store<State> ({
   photo: 'https://img1.daumcdn.net/thumb/C428x428/?scode=mtistory2&fname=https%3A%2F%2Ftistory3.daumcdn.net%2Ftistory%2F6816474%2Fattach%2F4010bd58edaf489ba91fa79814aba636',
   name: 'KimMinGyun',
   email: 't01045999371@gmail.com',
